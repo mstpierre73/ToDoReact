@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './ToDo.css';
 
 class ToDo extends Component {
     constructor(props){
@@ -11,6 +12,11 @@ class ToDo extends Component {
         this.toogleForm = this.toogleForm.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleToogleCompleted = this.handleToogleCompleted.bind(this);
+    }
+
+    handleToogleCompleted() {
+        this.props.toogleCompleted(this.props.id)
     }
 
     handleChange(event) {
@@ -52,7 +58,10 @@ class ToDo extends Component {
         } else {
             result=(
                 <div>
-                    <li>{this.props.task}</li>
+                    <li 
+                        className={this.props.completed ? 'completed' : ''}
+                        onClick={this.handleToogleCompleted}
+                    >{this.props.task}</li>
                     <button onClick={this.toogleForm}>Edit</button>
                     <button onClick={this.handleRemove}>Delete</button>
                 </div>
